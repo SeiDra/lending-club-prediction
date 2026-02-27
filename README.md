@@ -4,7 +4,7 @@ Ce projet d'analyse de données et de Machine Learning a pour objectif de prédi
 
 ## Structure du projet
 * `DATA/` : Dossier contenant les données brutes (non incluses sur Git).
-* `lending-club-loan-default-prediction-eda.ipynb` : Notebook d'analyse exploratoire (EDA) et de modélisation.
+* `du-sda-lending-club.ipynb` : Notebook d'analyse exploratoire (EDA) et de modélisation.
 * `requirements.txt` : Liste des dépendances et bibliothèques Python nécessaires.
 
 ## Installation et Configuration
