@@ -7,3 +7,6 @@ ARCHIVES/
 # Contenu du dossier DATA
 DATA/*
 !DATA/.gitkeep
+
+# App
+credit_app.py
