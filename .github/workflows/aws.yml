@@ -6,9 +6,9 @@ on:
 
 env:
   AWS_REGION: eu-west-3
-  ECR_REPOSITORY: seidra/lending-club-mlops
+  ECR_REPOSITORY: seidra/mlops
   ECS_SERVICE: lending-club-service
-  ECS_CLUSTER: LendingClubCluster
+  ECS_CLUSTER: MlopsCluster
   ECS_TASK_DEFINITION: lending-club-task
   CONTAINER_NAME: credit-app-mlops
 
