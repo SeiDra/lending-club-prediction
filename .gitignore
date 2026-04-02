@@ -10,3 +10,9 @@ DATA/*
 
 # App
 credit_app.py
+
+# Machine Learning
+mlruns/*
+!mlruns/.gitkeep
+model/*
+!model/.gitkeep
