@@ -1,39 +1,84 @@
-# Prédiction de Défaut de Paiement - Lending Club
+# 🏦 Prédiction de Défaut de Paiement — LendingClub
 
-Ce projet d'analyse de données et de Machine Learning a pour objectif de prédire le risque de défaut de paiement des emprunteurs en utilisant les données historiques du Lending Club.
+Projet MLOps end-to-end de prédiction du risque de crédit sur les données historiques du Lending Club.
 
-## Structure du projet
-* `DATA/` : Dossier contenant les données brutes (non incluses sur Git).
-* `du-sda-lending-club.ipynb` : Notebook d'analyse exploratoire (EDA) et de modélisation.
-* `requirements.txt` : Liste des dépendances et bibliothèques Python nécessaires.
+## Architecture du Projet
 
-## Installation et Configuration
+```
+lending-club-prediction/
+├── .github/
+│   └── workflows/
+│       ├── github-docker-cicd.yaml  ← Pipeline CI/CD (Docker Hub)
+│       └── aws.yml                  ← Déploiement AWS ECS
+├── pipeline/                        ← Application de déploiement
+│   ├── credit_app_mlops.py          ← App Streamlit
+│   ├── Dockerfile                   ← Image Docker
+│   ├── requirements.txt             ← Dépendances légères (prod)
+│   ├── test.py                      ← Tests unitaires (CI)
+│   ├── .dockerignore
+│   └── model/
+│       ├── best_model.pkl           ← Modèle LightGBM (généré par P4)
+│       └── features_config.json     ← Config features (généré par P4)
+├── CONFIG/                          ← Configuration des notebooks
+├── DATA/                            ← Données brutes (non versionnées)
+├── mlruns/                          ← Expériences MLflow (non versionnées)
+├── du_sda_ml2_P1_import_parquet_filtre-current.ipynb
+├── du_sda_ml2_P2_data_explo.ipynb
+├── du_sda_ml2_P3_feature_engineering.ipynb
+├── du_sda_ml2_P4_modeling_mlops.ipynb  ← Modélisation + MLflow tracking
+├── requirements.txt                 ← Dépendances complètes (dev)
+└── README.md
+```
 
-Pour reproduire ce projet sur votre machine locale, veuillez suivre les étapes ci-dessous.
+## Pipeline MLOps
 
-### 1. Créer l'environnement virtuel
-Il est fortement recommandé d'isoler les dépendances du projet. À la racine du projet, ouvrez votre terminal et exécutez :
+### 1. Expérimentation (Notebooks)
+| Notebook | Rôle |
+|---|---|
+| P1 | Import CSV → Parquet, filtrage |
+| P2 | EDA, nettoyage, variable cible |
+| P3 | Feature engineering, normalisation, split |
+| P4 | **MLflow** : 3 experiments (DT / LR / LightGBM), évaluation |
+
+### 2. Tracking — MLflow
+- **3 experiments** : `DecisionTree`, `LogisticRegression`, `LightGBM`
+- Métriques loggées : ROC-AUC, AUPRC, Recall, F2-Score, KS Statistic
+- Lancer l'UI : `mlflow ui` → http://127.0.0.1:5000
+
+### 3. Application — Streamlit
+```bash
+streamlit run pipeline/credit_app_mlops.py
+```
+
+### 4. CI/CD — GitHub Actions → Docker Hub
+Le pipeline se déclenche à chaque push sur `main` :
+1. **CI** : Format (black) → Lint (pylint) → Tests (pytest)
+2. **CD** : Build image Docker → Push sur Docker Hub
+
+## Installation
 
 ```bash
+# 1. Cloner le repo
+git clone https://github.com/SeiDra/lending-club-prediction.git
+cd lending-club-prediction
+
+# 2. Créer l'environnement virtuel
 python -m venv .venv
-```
+.\.venv\Scripts\Activate.ps1   # Windows
+# source .venv/bin/activate    # Linux/Mac
 
-### 2. Activer l'environnement virtuel (Windows / PowerShell)
-Pour activer l'environnement que vous venez de créer, lancez la commande suivante :
-
-```Bash
-.\.venv\Scripts\Activate.ps1
-```
-
-L'indicateur (.venv) devrait maintenant apparaître au début de votre ligne de commande.
-
-### 3. Installer les dépendances
-
-Une fois l'environnement activé, installez l'ensemble des bibliothèques requises (Pandas, Scikit-Learn, XGBoost, LightGBM, etc.) avec la commande suivante :
-
-```Bash
+# 3. Installer les dépendances
 pip install -r requirements.txt
+
+# 4. Lancer les notebooks dans l'ordre P1 → P2 → P3 → P4
 ```
 
-### Utilisation
-Une fois l'installation terminée, vous pouvez sélectionner le noyau (kernel) .venv dans votre éditeur (comme VS Code) et exécuter les cellules du notebook lending-club-loan-default-prediction-eda.ipynb.
+## Secrets GitHub requis (Settings → Secrets → Actions)
+
+| Secret | Description |
+|---|---|
+| `DOCKER_USER` | Identifiant Docker Hub |
+| `DOCKER_PASSWORD` | Token Docker Hub |
+| `REPO_NAME` | Nom du repo Docker Hub (ex: `lending-club-mlops`) |
+| `AWS_ACCESS_KEY_ID` | *(optionnel)* Pour déploiement AWS ECS |
+| `AWS_SECRET_ACCESS_KEY` | *(optionnel)* Pour déploiement AWS ECS |
