@@ -8,11 +8,11 @@ ARCHIVES/
 DATA/*
 !DATA/.gitkeep
 
-# App
-credit_app.py
-
 # Machine Learning
 mlruns/*
 !mlruns/.gitkeep
+
 model/*
 !model/.gitkeep
+!model/best_model.pkl
+!model/features_config.json

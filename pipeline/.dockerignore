@@ -1,0 +1,31 @@
+# Git
+.git/
+.gitignore
+.github/
+
+# Environnement virtuel
+.venv/
+venv/
+env/
+
+# Fichiers compilés Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Fichiers liés à Jupyter Notebook
+*.ipynb
+.ipynb_checkpoints/
+
+# Dossiers du projet inutiles pour l'application finale
+ARCHIVES/
+DATA/
+mlruns/
+
+# Fichiers d'environnement (sécurité)
+.env
+
+# Docker lui-même
+Dockerfile
+.dockerignore
