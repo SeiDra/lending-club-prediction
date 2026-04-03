@@ -6,6 +6,9 @@ LABEL maintainer="SeiDra"
 LABEL project="lending-club-mlops"
 LABEL description="Credit Risk Analyzer — LendingClub Streamlit App"
 
+# Installation de libgomp
+RUN apt-get update && apt-get install -y libgomp1 && rm -rf /var/lib/apt/lists/*
+
 # Répertoire de travail dans le conteneur
 WORKDIR /app
 
