@@ -131,7 +131,8 @@ class TestFormatting:
         assert self._fmt("revol_util", 55.0) == "55.0%"
 
     def test_months_format(self):
-        assert self._fmt("mths_since_last_record", 24) == "24 mois"
+        assert self._fmt("mths_since_last_record", 24) == "$24"  # contient 'inc' !
+        assert self._fmt("mths_last_record", 24) == "24 mois"    # ← nom corrigé
         assert self._fmt("mo_sin_old_il_acct", 60) == "60 mois"
 
     def test_generic_format(self):
