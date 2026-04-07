@@ -5,11 +5,13 @@ Correction v2 : les sliders affichent les valeurs REELLES (dollars, %, etc.)
 La standardisation z=(x-mean)/std est appliquée AVANT la prédiction.
 """
 
-import streamlit as st
-import pandas as pd
+import json
+import os
+import joblib
 import numpy as np
-import joblib, json, os
+import pandas as pd
 import plotly.graph_objects as go
+import streamlit as st
 
 st.set_page_config(
     page_title="Credit Risk Analyzer",
@@ -61,7 +63,7 @@ def load_artifacts():
     )
     if not os.path.exists(mp) or not os.path.exists(cp):
         return None, None
-    return joblib.load(mp), json.load(open(cp))
+    return joblib.load(mp), json.load(open(cp,encoding="utf-8"))
 
 
 model, config = load_artifacts()
@@ -436,7 +438,7 @@ with cg:
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         height=280,
-        margin=dict(l=20, r=20, t=40, b=10),
+        margin = {"l": 20, "r": 20, "t": 40, "b": 10},
         font_color="#e8f0fe",
     )
     st.plotly_chart(fig, use_container_width=True)
@@ -463,8 +465,8 @@ with ci:
                 f'<div class="fr"><div class="fn">{lbl(f)[:24]}</div><div class="fb"><div class="ff" style="width:{bp}%"></div></div><div class="fv">{imp:,.0f}</div></div>',
                 unsafe_allow_html=True,
             )
-    except:
-        st.info("Importances non disponibles.")
+    except (AttributeError, KeyError, ValueError):
+        st.info("Importances non disponibles pour ce modèle.")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
 st.markdown(

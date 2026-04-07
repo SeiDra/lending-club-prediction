@@ -14,9 +14,7 @@ load-plugins =
 ignore = mlruns, DATA, .venv, __pycache__, .ipynb_checkpoints
 
 [MESSAGES CONTROL]
-# ── Catégories désactivées globalement ─────────────────────────────────────
-# R = Refactoring (trop verbeux pour du code data science)
-# C = Convention (géré par Black, inutile de doubler)
+
 disable =
     # -- Convention (Black s'en charge) --
     C0103,  # invalid-name          : x, df, X sont courants en ML
@@ -25,6 +23,7 @@ disable =
     C0116,  # missing-function-docstring
     C0301,  # line-too-long         : géré par Black
     C0302,  # too-many-lines
+    C3001,  # unnecessary-lambda-assignment : autorise les lambdas nommées
 
     # -- Refactoring (trop strict pour notebooks/scripts ML) --
     R0801,  # duplicate-code
@@ -37,13 +36,8 @@ disable =
 
     # -- Warnings faux positifs fréquents en data science --
     W0621,  # redefined-outer-name  : pattern pytest/fixtures
-    W0702,  # bare-except           : déjà dans le code existant
-    W1514,  # unspecified-encoding  : open() sans encoding=
-    W0611,  # unused-import         : souvent voulu dans notebooks
-    W0104,  # pointless-statement   : cellules de display dans notebooks
 
     # -- Notebooks (nbqa génère des faux positifs) --
-    W0401,  # wildcard-import
     E0401,  # import-error          : dépend de l'env CI, géré par pytest
 
 [FORMAT]
