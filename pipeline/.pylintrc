@@ -1,7 +1,4 @@
 # ── .pylintrc ──────────────────────────────────────────────────────────────
-# Configuration Pylint pour le projet LendingClub MLOps.
-# Objectif : garder les checks utiles, supprimer le bruit des notebooks
-# et des patterns courants en data science / Streamlit.
 
 [MASTER]
 # Parallélisme pour accélérer l'analyse
@@ -16,29 +13,21 @@ ignore = mlruns, DATA, .venv, __pycache__, .ipynb_checkpoints
 [MESSAGES CONTROL]
 
 disable =
-    # -- Convention (Black s'en charge) --
-    C0103,  # invalid-name          : x, df, X sont courants en ML
-    C0114,  # missing-module-docstring
-    C0115,  # missing-class-docstring
-    C0116,  # missing-function-docstring
-    C0301,  # line-too-long         : géré par Black
+    # -- Style & Conventions --
+    C0103,  # invalid-name (pour autoriser X, c, niv)
+    C0114, C0115, C0116, # missing-docstrings (on ne veut pas documenter chaque fonction)
+    C0301,  # line-too-long (pour tes blocs HTML/CSS de Streamlit)
     C0302,  # too-many-lines
-    C3001,  # unnecessary-lambda-assignment : autorise les lambdas nommées
+    C3001,  # unnecessary-lambda-assignment (pour tes lambdas lbl, rc, etc.)
 
-    # -- Refactoring (trop strict pour notebooks/scripts ML) --
-    R0801,  # duplicate-code
-    R0902,  # too-many-instance-attributes
-    R0903,  # too-few-public-methods
-    R0912,  # too-many-branches
-    R0913,  # too-many-arguments
-    R0914,  # too-many-locals
-    R0915,  # too-many-statements
+    # -- Refactoring & Complexité --
+    R0801, R0902, R0903, R0912, R0913, R0914, R0915,
 
-    # -- Warnings faux positifs fréquents en data science --
-    W0621,  # redefined-outer-name  : pattern pytest/fixtures
-
-    # -- Notebooks (nbqa génère des faux positifs) --
-    E0401,  # import-error          : dépend de l'env CI, géré par pytest
+    # -- Warnings --
+    W0621,  # redefined-outer-name (pour tes variables f, s, stats utilisées partout)
+    
+    # -- Autres --
+    E0401   # import-error (géré par la CI) 
 
 [FORMAT]
 # Aligné avec Black

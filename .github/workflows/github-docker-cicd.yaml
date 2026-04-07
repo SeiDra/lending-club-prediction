@@ -45,6 +45,7 @@ jobs:
 
       - name: Lint (pylint)
         run: |
+          cd pipeline
           pylint credit_app_mlops.py
 
       - name: Test (pytest)

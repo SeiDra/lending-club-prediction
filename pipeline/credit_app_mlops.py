@@ -63,7 +63,7 @@ def load_artifacts():
     )
     if not os.path.exists(mp) or not os.path.exists(cp):
         return None, None
-    return joblib.load(mp), json.load(open(cp,encoding="utf-8"))
+    return joblib.load(mp), json.load(open(cp, encoding="utf-8"))
 
 
 model, config = load_artifacts()
@@ -438,7 +438,7 @@ with cg:
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         height=280,
-        margin = {"l": 20, "r": 20, "t": 40, "b": 10},
+        margin={"l": 20, "r": 20, "t": 40, "b": 10},
         font_color="#e8f0fe",
     )
     st.plotly_chart(fig, use_container_width=True)
