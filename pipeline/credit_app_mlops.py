@@ -299,9 +299,7 @@ with st.sidebar:
                         (float(round(r / 200)), "%.0f")
                         if r > 10000
                         else (
-                            (round(r / 200, 1), "%.1f")
-                            if r > 100
-                            else (round(r / 200, 3), "%.3f")
+                            (round(r / 200, 1), "%.1f") if r > 100 else (round(r / 200, 3), "%.3f")
                         )
                     )
                     val = st.slider(
