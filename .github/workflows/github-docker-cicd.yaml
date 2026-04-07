@@ -44,7 +44,7 @@ jobs:
 
       - name: Lint (pylint)
         run: |
-          pylint --disable=R,C,W0621,W0702,W1514 credit_app_mlops.py
+          pylint credit_app_mlops.py
 
       - name: Test (pytest)
         run: |
