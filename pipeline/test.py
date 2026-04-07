@@ -22,22 +22,27 @@ import pytest
 class TestImports:
     def test_streamlit_importable(self):
         import streamlit
+
         assert streamlit is not None
 
     def test_plotly_importable(self):
         import plotly.graph_objects as go
+
         assert go is not None
 
     def test_lightgbm_importable(self):
         import lightgbm
+
         assert lightgbm is not None
 
     def test_joblib_importable(self):
         import joblib
+
         assert joblib is not None
 
     def test_sklearn_importable(self):
         import sklearn
+
         assert sklearn is not None
 
 
@@ -132,7 +137,7 @@ class TestFormatting:
 
     def test_months_format(self):
         assert self._fmt("mths_since_last_record", 24) == "$24"  # contient 'inc' !
-        assert self._fmt("mths_last_record", 24) == "24 mois"    # ← nom corrigé
+        assert self._fmt("mths_last_record", 24) == "24 mois"  # ← nom corrigé
         assert self._fmt("mo_sin_old_il_acct", 60) == "60 mois"
 
     def test_generic_format(self):

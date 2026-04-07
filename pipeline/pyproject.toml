@@ -1,4 +1,21 @@
+
 [tool.black]
-line-length = 100
-target-version = ['py310']
+line-length = 100          
+target-version = ["py310"] 
 include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # Dossiers à ignorer
+  \.git
+  | \.venv
+  | __pycache__
+  | mlruns
+  | DATA
+  | \.ipynb_checkpoints
+)/
+'''
+ 
+# ── pytest (pour éviter un pyproject.toml séparé) ──────────────────────────
+[tool.pytest.ini_options]
+testpaths = ["pipeline"]
+python_files = ["test.py"]
