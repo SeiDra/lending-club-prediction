@@ -1,0 +1,77 @@
+# ── .pylintrc ──────────────────────────────────────────────────────────────
+# Configuration Pylint pour le projet LendingClub MLOps.
+# Objectif : garder les checks utiles, supprimer le bruit des notebooks
+# et des patterns courants en data science / Streamlit.
+
+[MASTER]
+# Parallélisme pour accélérer l'analyse
+jobs = 1
+
+# Extensions utiles
+load-plugins =
+
+# Ignorer les dossiers non pertinents
+ignore = mlruns, DATA, .venv, __pycache__, .ipynb_checkpoints
+
+[MESSAGES CONTROL]
+# ── Catégories désactivées globalement ─────────────────────────────────────
+# R = Refactoring (trop verbeux pour du code data science)
+# C = Convention (géré par Black, inutile de doubler)
+disable =
+    # -- Convention (Black s'en charge) --
+    C0103,  # invalid-name          : x, df, X sont courants en ML
+    C0114,  # missing-module-docstring
+    C0115,  # missing-class-docstring
+    C0116,  # missing-function-docstring
+    C0301,  # line-too-long         : géré par Black
+    C0302,  # too-many-lines
+
+    # -- Refactoring (trop strict pour notebooks/scripts ML) --
+    R0801,  # duplicate-code
+    R0902,  # too-many-instance-attributes
+    R0903,  # too-few-public-methods
+    R0912,  # too-many-branches
+    R0913,  # too-many-arguments
+    R0914,  # too-many-locals
+    R0915,  # too-many-statements
+
+    # -- Warnings faux positifs fréquents en data science --
+    W0621,  # redefined-outer-name  : pattern pytest/fixtures
+    W0702,  # bare-except           : déjà dans le code existant
+    W1514,  # unspecified-encoding  : open() sans encoding=
+    W0611,  # unused-import         : souvent voulu dans notebooks
+    W0104,  # pointless-statement   : cellules de display dans notebooks
+
+    # -- Notebooks (nbqa génère des faux positifs) --
+    W0401,  # wildcard-import
+    E0401,  # import-error          : dépend de l'env CI, géré par pytest
+
+[FORMAT]
+# Aligné avec Black
+max-line-length = 100
+indent-string = '    '
+
+[DESIGN]
+# Seuils assouplis pour le code ML/Streamlit
+max-args = 10
+max-locals = 20
+max-returns = 8
+max-branches = 15
+max-statements = 60
+max-attributes = 10
+
+[SIMILARITIES]
+# Éviter les faux positifs sur du code répétitif (feature engineering)
+min-similarity-lines = 10
+ignore-imports = yes
+ignore-docstrings = yes
+
+[VARIABLES]
+# Noms courts courants en data science
+good-names = i, j, k, x, y, X, df, ax, fig, f, v, s, c, p, g, r
+
+[REPORTS]
+# Format compact pour la CI
+output-format = colorized
+reports = no
+score = yes
