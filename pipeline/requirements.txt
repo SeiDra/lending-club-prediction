@@ -12,5 +12,5 @@ joblib>=1.3
 
 # ── Outils CI (format / lint / test) ──────────────────────────────────────
 black==24.10.0
-pylint
+pylint==3.0.3
 pytest
