@@ -43,10 +43,10 @@ jobs:
         run: |
           black --check --verbose .
 
-      - name: Lint (pylint)
+      - name: Lint with pylint
+        working-directory: ./pipeline  
         run: |
-          cd pipeline
-          pylint credit_app_mlops.py
+          python -m pylint credit_app_mlops.py
 
       - name: Test (pytest)
         run: |
