@@ -1,0 +1,156 @@
+{
+  "features": [
+    "installment_to_income",
+    "installment",
+    "dti",
+    "fico_avg",
+    "annual_inc",
+    "total_acc",
+    "bc_open_to_buy",
+    "bc_util",
+    "mo_sin_old_rev_tl_op",
+    "mo_sin_old_il_acct",
+    "total_bc_limit",
+    "mths_since_recent_bc",
+    "credit_age_years",
+    "revol_bal",
+    "acc_open_past_24mths"
+  ],
+  "stats": {
+    "installment_to_income": {
+      "min": 0.0114,
+      "max": 0.1953,
+      "median": 0.0765,
+      "mean": 0.078719,
+      "std": 0.04198,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "installment": {
+      "min": 56.1781,
+      "max": 1223.77,
+      "median": 381.27,
+      "mean": 430.367627,
+      "std": 255.481212,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "dti": {
+      "min": 1.88,
+      "max": 35.6043,
+      "median": 18.11,
+      "mean": 17.783698,
+      "std": 8.108842,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "fico_avg": {
+      "min": 662.0,
+      "max": 797.0,
+      "median": 687.0,
+      "mean": 697.859209,
+      "std": 31.642813,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "annual_inc": {
+      "min": 18010.602,
+      "max": 200000.0,
+      "median": 63000.0,
+      "mean": 72545.216512,
+      "std": 37949.086173,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "total_acc": {
+      "min": 5.0,
+      "max": 54.0,
+      "median": 23.0,
+      "mean": 24.301981,
+      "std": 11.048896,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "bc_open_to_buy": {
+      "min": 0.0,
+      "max": 65922.58,
+      "median": 3922.5,
+      "mean": 9354.534147,
+      "std": 14218.573953,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "bc_util": {
+      "min": 0.0,
+      "max": 100.6,
+      "median": 61.8,
+      "mean": 56.744133,
+      "std": 30.234019,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "mo_sin_old_rev_tl_op": {
+      "min": 27.0,
+      "max": 999.0,
+      "median": 164.0,
+      "mean": 223.264194,
+      "std": 205.850606,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "mo_sin_old_il_acct": {
+      "min": 11.0,
+      "max": 999.0,
+      "median": 131.0,
+      "mean": 197.237784,
+      "std": 245.852654,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "total_bc_limit": {
+      "min": 0.0,
+      "max": 91243.0,
+      "median": 13500.0,
+      "mean": 19917.177746,
+      "std": 19767.569468,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "mths_since_recent_bc": {
+      "min": 1.0,
+      "max": 999.0,
+      "median": 13.0,
+      "mean": 69.57234,
+      "std": 208.949875,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "credit_age_years": {
+      "min": 2.1656,
+      "max": 39.1677,
+      "median": 14.0835,
+      "mean": 15.686626,
+      "std": 7.572082,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "revol_bal": {
+      "min": 167.0,
+      "max": 63579.0,
+      "median": 10776.0,
+      "mean": 14408.553357,
+      "std": 12778.791198,
+      "is_binary": false,
+      "is_scaled": true
+    },
+    "acc_open_past_24mths": {
+      "min": 0.0,
+      "max": 15.0,
+      "median": 4.0,
+      "mean": 4.457472,
+      "std": 3.130608,
+      "is_binary": false,
+      "is_scaled": true
+    }
+  }
+}
